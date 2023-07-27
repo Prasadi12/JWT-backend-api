@@ -15,7 +15,12 @@ const db = mysql.createConnection({
 });
 
 const veriftJwt = (req,res,next) => {
-  const token = req.header("Access-token");
+  const token = req.header["Access-token"];
+  if(!token){
+    return res.json("We need token. Please provide it for next time")
+  }else{
+    jwt.verify(token,)
+  }
 }
 
 app.get('/checkauth',verifyJwt, (req,res) => {
