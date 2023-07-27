@@ -24,6 +24,7 @@ const veriftJwt = (req,res,next) => {
         res.json("Not Authenticated")
       }else{
         req.userId = decoded.id;
+        next();
       }
     })
   }
