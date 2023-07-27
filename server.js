@@ -14,6 +14,10 @@ const db = mysql.createConnection({
   database: "signup",
 });
 
+app.get('/checkauth', (req,res) => {
+  return res.json("Authenticated")
+})
+
 app.post("/signup", (req, res) => {
   const sql = "INSERT INTO registration (`email`,`password`) VALUES(?)";
   const value = [req.body.email, req.body.password];
