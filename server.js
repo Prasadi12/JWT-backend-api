@@ -15,7 +15,7 @@ const db = mysql.createConnection({
 });
 
 const veriftJwt = (req,res,next) => {
-
+  const token = req.header("Access-token");
 }
 
 app.get('/checkauth',verifyJwt, (req,res) => {
