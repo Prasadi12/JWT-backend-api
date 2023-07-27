@@ -14,7 +14,11 @@ const db = mysql.createConnection({
   database: "signup",
 });
 
-app.get('/checkauth', (req,res) => {
+const veriftJwt = (req,res,next) => {
+
+}
+
+app.get('/checkauth',verifyJwt, (req,res) => {
   return res.json("Authenticated")
 })
 
