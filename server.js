@@ -19,7 +19,13 @@ const veriftJwt = (req,res,next) => {
   if(!token){
     return res.json("We need token. Please provide it for next time")
   }else{
-    jwt.verify(token,)
+    jwt.verify(token, "jwtSecretKey", (err,decoded) => {
+      if(err){
+        res.json("Not Authenticated")
+      }else{
+        req.userId = decoded.id;
+      }
+    })
   }
 }
 
