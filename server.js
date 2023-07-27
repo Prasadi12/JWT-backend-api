@@ -14,8 +14,8 @@ const db = mysql.createConnection({
   database: "signup",
 });
 
-const veriftJwt = (req,res,next) => {
-  const token = req.header["Access-token"];
+const verifyJwt = (req, res, next) => {
+  const token = req.headers["Access-token"];
   if(!token){
     return res.json("We need token. Please provide it for next time")
   }else{
@@ -49,8 +49,9 @@ app.post("/login", (req, res) => {
   const sql = "SELECT * FROM registration WHERE `email` = ? AND `password` = ?";
   db.query(sql, [req.body.email, req.body.password], (err, data) => {
     if (err) {
-      res.json("Error");
-    } else if (data.length > 0) {
+      return res.json("Error");
+    }
+    if (data.length > 0) {
       const id = data[0].id;
       const token = jwt.sign({id}, "jwtSecretKey", {expiresIn: 300});
       return res.json({Login: true, token, data});
